@@ -1,10 +1,13 @@
-import {test as base, TestFixture} from "@playwright/test";
+import {test as base} from "@playwright/test";
 import { LogInPageSteps } from "../src/steps/logInPageSteps";
 
 type TestFixture ={
     logInSteps:LogInPageSteps;
 }
 
-base.extend<TestFixture>({
-
+export const test=base.extend<TestFixture>({
+    logInSteps:async({page},use)=>{
+        const logInSteps=new LogInPageSteps(page);
+        await use(logInSteps);
+    }
 })
